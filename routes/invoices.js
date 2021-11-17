@@ -1,6 +1,7 @@
 /** Routes for invoices. */
 
 const express = require("express");
+const slugify = require("slugify");
 const ExpressError = require("../expressError");
 const db = require("../db");
 
@@ -89,6 +90,7 @@ router.get("/:id", async function (req, res, next) {
 router.post("/", async function (req, res, next) {
   try {
     let { comp_code, amt } = req.body;
+    //let code = slugify(comp_code, { lower: true });
 
     const result = await db.query(
       `INSERT INTO invoices (comp_code, amt) 
